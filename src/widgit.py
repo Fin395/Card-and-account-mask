@@ -1,41 +1,47 @@
 from datetime import datetime
 
-from src.masks import get_mask_card_number, get_mask_account
+from src.masks import get_mask_account, get_mask_card_number
+
 
 def mask_account_card(type_and_account_or_card_number: str) -> str:
     """Функция возвращает замаскированный номер карты/счета"""
     while True:
-        splitted_input = type_and_account_or_card_number.strip().split(' ')
+        splitted_input = type_and_account_or_card_number.strip().split(" ")
 
-        if len(splitted_input) !=2:
-            type_and_account_or_card_number = input('Введите корректный тип и номер карты или номер счета:\n')
+        if len(splitted_input) != 2:
+            type_and_account_or_card_number = input("Введите корректный тип и номер карты или номер счета:\n")
             continue
 
         card_type = splitted_input[0]
         number_part = splitted_input[-1]
 
-
-        if card_type.lower() not in ['visa', 'maestro', 'счет', 'mastercard']:
-           type_and_account_or_card_number = input('Введите корректный тип: visa, maestro, mastercard или счет:\n')
-           continue
-
-        if not number_part.isdigit():
-            type_and_account_or_card_number = input('Номер карты или счета должен состоять только из цифр. Введите корректный номер:\n')
+        if card_type.lower() not in ["visa", "maestro", "счет", "mastercard"]:
+            type_and_account_or_card_number = input("Введите корректный тип: visa, maestro, mastercard или счет:\n")
             continue
 
-        if card_type == 'счет':
+        if not number_part.isdigit():
+            type_and_account_or_card_number = input(
+                "Номер карты или счета должен состоять только из цифр. Введите корректный номер:\n"
+            )
+            continue
+
+        if card_type == "счет":
             if len(splitted_input) == 2 and len(number_part) == 20:
                 masked_account = get_mask_account(number_part)
-                return f'{card_type} {masked_account}'
+                return f"{card_type} {masked_account}"
             else:
-                type_and_account_or_card_number = input('Номер счета должен состоять из 20 цифр. Введите корректный номер счета:\n')
+                type_and_account_or_card_number = input(
+                    "Номер счета должен состоять из 20 цифр. Введите корректный номер счета:\n"
+                )
                 continue
         else:
             if len(number_part) == 16:
                 masked_card = get_mask_card_number(number_part)
-                return f'{card_type} {masked_card}'
+                return f"{card_type} {masked_card}"
             else:
-                type_and_account_or_card_number = input('Номер карты должен состоять из 16 цифр. Введите корректный номер карты:\n')
+                type_and_account_or_card_number = input(
+                    "Номер карты должен состоять из 16 цифр. Введите корректный номер карты:\n"
+                )
                 continue
 
 
