@@ -3,7 +3,6 @@ from datetime import datetime
 from src.masks import get_mask_account, get_mask_card_number
 
 
-
 def mask_account_card(type_and_account_or_card_number: str) -> str:
     """Функция возвращает замаскированный номер карты/счета"""
     while True:
