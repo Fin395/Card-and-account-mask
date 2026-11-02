@@ -24,9 +24,7 @@ def mask_account_card(type_and_account_or_card_number: str) -> str:
         masked_card = get_mask_card_number(number_part)
         return f"{card_type} {masked_card}"
 
-
-
-      # while True:
+    # while True:
     #     splitted_input = type_and_account_or_card_number.strip().split(" ")
     #
     #     if len(splitted_input) != 2:
@@ -66,7 +64,7 @@ def mask_account_card(type_and_account_or_card_number: str) -> str:
     #             continue
 
 
-def get_date(date: str) -> str:
+def get_date(date: str) -> str | None:
     """Функция преобразует дату в формат 'DD.MM.YYYY'"""
     fixed_date = None
 
@@ -75,16 +73,17 @@ def get_date(date: str) -> str:
             date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
             fixed_date = date.strftime("%d.%m.%Y")
         else:
-            raise ValueError('Не указана дата операции')
+            raise ValueError("Не указана дата операции")
     except ValueError:
-        print('Отсутствует дата операции')
+        print("Отсутствует дата операции")
     finally:
         return fixed_date
+
 
 if __name__ == "__main__":
     print(get_date("-07-03T18:35:29.512364"))
 
-    print(mask_account_card('счет 11111111111111111111'))
+    print(mask_account_card("счет 11111111111111111111"))
 
 # def validate_and_parse(raw: str):
 #     """
