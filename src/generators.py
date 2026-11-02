@@ -12,6 +12,27 @@ def transaction_descriptions(transactions: list[dict]) -> Generator[str, None, N
     for description in descriptions:
         yield description
 
+
+def card_number_generator(start: int, end: int):
+    """
+    Генератор номеров банковских карт в формате XXXX XXXX XXXX XXXX.
+
+    Диапазон: от start до end включительно.
+    Номера выводятся как строки с пробелами каждые 4 цифры.
+
+    Пример:
+        start=1, end=3 -> "0000 0000 0000 0001", "0000 0000 0000 0002", "0000 0000 0000 0003"
+    """
+    if not (0 <= start <= end <= 9999_9999_9999_9999):
+        raise ValueError("Диапазон должен быть в пределах [0, 9999999999999999]")
+
+    for num in range(start, end + 1):
+        # Форматируем число как 16-значную строку с ведущими нулями
+        num_str = f"{num:016d}"
+        # Разбиваем на группы по 4 символа через пробел
+        formatted = f"{num_str[:4]} {num_str[4:8]} {num_str[8:12]} {num_str[12:]}"
+        yield formatted
+
 # transactions = (
 #     [
 #         {
