@@ -23,6 +23,8 @@ def log(filename=None):
             finally:
                 finish_log_text = f'Окончание работы функции {func.__name__}: {datetime.now()}'
                 status_log_text = f'{func.__name__} {status}: {error_message}'
+                if status == 'ok':
+                    status_log_text = f'{func.__name__} {status}'
                 print(finish_log_text)
                 print(status_log_text)
                 if filename:
@@ -37,5 +39,5 @@ def log(filename=None):
 # def add_two(n):
 #     return n+2
 #
-# print(add_two(5))
+# print(add_two('5'))
 
