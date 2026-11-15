@@ -1,5 +1,4 @@
 from src.decorators import log
-import pytest
 
 
 def test_log_return():
@@ -37,6 +36,7 @@ def test_log_in_file():
     assert 'add_two ok' in content
 
 def test_log_console_if_exception(capsys):
+    """Проверяем вывод ошибки в консоль"""
     @log('my_file.txt')
     def add_two(x):
         """Создаем функцию для проверки работы декоратора"""
